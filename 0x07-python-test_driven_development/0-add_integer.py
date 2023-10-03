@@ -1,6 +1,15 @@
 #!/usr/bin/python3
+"""
+    This is an add module
+    author: peter ekwere
+
+"""
+
 
 def add_integer(a, b=98):
+    """
+    Add two integers and returns the sum
+    """
     try:
         if not isinstance(a, (int, float)):
             raise TypeError("a must be an integer")
