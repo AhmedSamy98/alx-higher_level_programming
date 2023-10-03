@@ -1,0 +1,39 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+====================
+How to Use 0-add_integer.py
+====================
+
+This module contains a function that adds an integer ``add_integer(a, b=98)``.
+
+Usage
+=====
+
+``add_integer(*args)`` returns the addition of its two arguments. For numbers, that value is equivalent to using the ``+`` operator, first you will import the add integer module:
+    >>> import sys
+    >>> sys.path.append("..")
+    >>> add_integer = __import__('0-add_integer').add_integer
+    
+Now you can use it:
+
+    >>> add_integer(2, 3)
+    5
+
+    >>> add_integer(0.5, 0.5)
+    0
+
+    >>> add_integer(2**31, 2**31)
+    4294967296
+
+    >>> add_integer("10", 5)
+    'a must be an integer'
+
+    >>> add_integer(None, None)
+    'a must be an integer'
+
+    >>> add_integer(3, '5')
+    'b must be an integer'
+    
+    >>> add_integer(2.3, None)
+    'b must be an integer'
