@@ -1,78 +1,83 @@
 #!/usr/bin/python3
-"""
-    Module: Square class inherits Rectangle
-"""
-
+"""Defines a square class."""
 from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """
-        Square class inheirts rectangle
-    """
+    """Represent a square."""
 
     def __init__(self, size, x=0, y=0, id=None):
-        """
-            Initializes the instance of Square class
+        """Initialize a new Square.
 
-            Args:
-                size: size of the square
-                x: x coordinate of the square
-                y: y coordinate of the square
-                id: id of the square
+        Args:
+            size (int): The size of the new Square.
+            x (int): The x coordinate of the new Square.
+            y (int): The y coordinate of the new Square.
+            id (int): The identity of the new Square.
         """
         super().__init__(size, size, x, y, id)
 
     @property
     def size(self):
-        """
-            Getter for size
-        """
+        """Get/set the size of the Square."""
         return self.width
 
     @size.setter
     def size(self, value):
-        """
-            Setter for size
-        """
-        if type(value) != int:
-            raise TypeError("width must be an integer")
-        if value <= 0:
-            raise ValueError("width must be > 0")
-
         self.width = value
         self.height = value
 
     def update(self, *args, **kwargs):
+        """Update the Square.
+
+        Args:
+            *args (ints): New attribute values.
+                - 1st argument represents id attribute
+                - 2nd argument represents size attribute
+                - 3rd argument represents x attribute
+                - 4th argument represents y attribute
+            **kwargs (dict): New key/value pairs of attributes.
         """
-            Assign an argument to each attribute
-        """
-        if args:
-            for i, arg in enumerate(args):
-                if i == 0:
-                    self.id = arg
-                if i == 1:
+        if args and len(args) != 0:
+            a = 0
+            for arg in args:
+                if a == 0:
+                    if arg is None:
+                        self.__init__(self.size, self.x, self.y)
+                    else:
+                        self.id = arg
+                elif a == 1:
                     self.size = arg
-                if i == 2:
+                elif a == 2:
                     self.x = arg
-                if i == 3:
+                elif a == 3:
                     self.y = arg
-        else:
-            for key, value in kwargs.items():
-                if key == "id":
-                    self.id = value
-                if key == "size":
-                    self.size = value
-                if key == "x":
-                    self.x = value
-                if key == "y":
-                    self.y = value
+                a += 1
+
+        elif kwargs and len(kwargs) != 0:
+            for k, v in kwargs.items():
+                if k == "id":
+                    if v is None:
+                        self.__init__(self.size, self.x, self.y)
+                    else:
+                        self.id = v
+                elif k == "size":
+                    self.size = v
+                elif k == "x":
+                    self.x = v
+                elif k == "y":
+                    self.y = v
 
     def to_dictionary(self):
-        """
-            Returns dict representation of Square Class
-        """
-        return {'id': getattr(self, "id"),
-                'size': getattr(self, "width"),
-                'x': getattr(self, "x"),
-                'y': getattr(self, "y")}
+        """Return the dictionary representation of the Square."""
+        return {
+            "id": self.id,
+            "size": self.width,
+            "x": self.x,
+            "y": self.y
+        }
+
+    def __str__(self):
+        """Return the print() and str() representation of a Square."""
+        return "[Square] ({}) {}/{} - {}".format(self.id, self.x, self.y,
+                                                 self.width)
