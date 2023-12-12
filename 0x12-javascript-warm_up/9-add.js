@@ -1,13 +1,7 @@
 #!/usr/bin/node
-// prints the addition of two numbers
-const numbers = process.argv.slice(2);
 function add (a, b) {
-  a = parseInt(a);
-  b = parseInt(b);
-  if (isNaN(a) || isNaN(b)) {
-    console.log('NaN');
-  } else {
-    console.log(a + b);
-  }
+  const c = a + b;
+  console.log(c);
 }
-add(numbers[0], numbers[1]);
+
+add(Number(process.argv[2]), Number(process.argv[3]));
