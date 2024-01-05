@@ -1,35 +1,39 @@
 #!/usr/bin/python3
 """
-    This is a peak module
-    Author: Peter Ekwere
-
+Find the peak in an unordered list of integers using binary search
 """
 
-
-def isPeak(a_list, size, number, index_i, index_j):
-    """ This function returns true if peak else false
-    """
-    if index_i is not None and a_list[index_i] > number:
-        return False
-
-    if index_j is not None and a_list[index_i] > number:
-        return False
-
-    return True
-
-
 def find_peak(list_of_integers):
-    """ This function returns the peak in a list
+    """
+    Find the peak in a list of integers using binary search.
+
+    Args:
+        list_of_integers (list): List of integers.
+
+    Returns:
+        int: The peak integer.
     """
     if not list_of_integers:
-        return
+        return None
 
-    size = len(list_of_integers)
-    index_j = size - 1
-    new_list = []
-    for index_i in range(1, len(list_of_integers)):
-        number = list_of_integers[index_i]
-        if isPeak(list_of_integers, size, number, index_i, index_j):
-            new_list.append(number)
-    peak = max(new_list)
-    return peak
+    left, right = 0, len(list_of_integers) - 1
+
+    while left < right:
+        mid = left + (right - left) // 2
+
+        if list_of_integers[mid] > list_of_integers[mid + 1]:
+            # If the current element is greater than the next element, move left
+            right = mid
+        else:
+            # Otherwise, move right
+            left = mid + 1
+
+    # At the end of the loop, left and right will converge to the peak element
+    return list_of_integers[left]
+
+# Example usage:
+if __name__ == "__main__":
+    test_list = [1, 3, 20, 4, 1, 0]
+    result = find_peak(test_list)
+    print("Peak element:", result)
+
